@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Semana 3</title>
+    <link rel="stylesheet" href="../Semana_03/styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container semana3">
+        <h1>Array / Objeto</h1>
+
+        <div class="button-container">
+            <button id="exercicio1">Array Dinâmico</button>
+            <button id="exercicio2">Calculo FIPE</button>
+            <a href="../index.html" class="btn voltar1">Voltar</a>
+
+        </div>
+
+        <!-- Exercício 1 -->
+        <div id="exercicio1Container" class="hidden">
+            <h2>Adicionar Valores ao Array</h2>
+            <form id="formulario">
+                <input type="text" id="valor" placeholder="Digite um valor" required>
+                <button type="submit">Adicionar</button>
+            </form>
+            <h3>Valores em Ordem Alfabética</h3>
+            <ol id="listaOrdenada"></ol>
+            <a href="index.html" class="btn voltar-semanas">Voltar</a>
+        </div>
+
+        <!-- Exercício 2 (Carro) -->
+        <div id="exercicio2Container" class="hidden">
+            <h2>Cadastro do Carro</h2>
+            <form id="formularioCarro">
+                <input type="text" id="marca" placeholder="Marca" required>
+                <input type="text" id="modelo" placeholder="Modelo" required>
+                <input type="number" id="ano" placeholder="Ano" required>
+                <input type="text" id="cor" placeholder="Cor" required>
+                <input type="number" id="kilometragem" placeholder="Kilometragem" required>
+                <input type="number" id="valorFipe" placeholder="Valor FIPE" required>
+                <button type="submit">Calcular</button>
+            </form>
+            <p id="resultadoCarro"></p>
+            <a href="index.html" class="btn voltar-semanas">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>
+
