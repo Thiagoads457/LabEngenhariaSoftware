@@ -189,3 +189,18 @@
 .button-group button:hover {
   background-color: #0056b3;
 }
+
+.btn-voltar {
+  padding: 5px 20px;
+  font-size: 12px;
+  font-family: Helvetica, sans-serif;
+  background-color: #28a745; /* Cor azul, pode mudar */
+  border: 1px solid #0056b3;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-voltar:hover {
+  background-color: #218838;
+}
