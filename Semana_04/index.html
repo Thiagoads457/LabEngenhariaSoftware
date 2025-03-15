@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Semana 4</title>
+    <link rel="stylesheet" href="../Semana_04/styles.css">
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Formulário de Cadastro:</h1>
+      <form id="form-cadastro">
+        <table class="form-table">
+          <div class="professor">
+            <tr>
+              <td colspan='3'>
+                <div class="form-group">
+                  <label for="nome">Nome Completo:</label>
+                  <input type="text" id="nome" placeholder="Digite seu nome completo" onblur="validarNome()" required>
+                  <small id="nome-erro" style="color: red; display: none;">Nome inválido! Use pelo menos nome e sobrenome.</small>
+
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan='2'>
+                <div class="form-group">
+                  <label for="email">E-mail:</label>
+                  <input type="email" id="email" placeholder="Digite seu e-mail" onblur="validarEmail()" required>
+                  <small id="email-erro" style="color: red; display: none;">E-mail inválido!</small>
+                </div>
+              </td>
+            
+              <td>
+                <div class="form-group">
+                  <label for="dataNascimento">Data de Nascimento:</label>
+                  <input type="date" id="dataNascimento" name="dataNascimento" onblur="validarData()">
+                  <span class="erro" id="erroData"></span>                
+                </div>             
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="telefone-fixo">Telefone Fixo:</label>
+                    <input type="tel" id="telefone-fixo" placeholder="(99)9999-9999" required onblur="validarTelefoneFixo()" />
+                    <small class="error" id="telefone-fixo-erro">Telefone fixo inválido</small>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="telefone-celular">Telefone Celular:</label>
+                    <input type="tel" id="telefone-celular" placeholder="(99)99999-9999" required onblur="validarTelefoneCelular(telefone-celular)" />
+                    <small class="error" id="telefone-celular-erro">Telefone celular inválido</small>
+                  </div>
+                </div>
+              </td>
+            
+              <td>
+                <div class="form-group">
+                  <div class="radio-group">
+                    <div>
+                      <input type="radio" id="professor" name="tipo" value="Professor" required checked onclick="alternarCampos()" />
+                      <label for="professor">Professor</label>
+                    </div>
+                    <div>
+                      <input type="radio" id="aluno" name="tipo" value="Aluno" required onclick="alternarCampos()" />
+                      <label for="aluno">Aluno</label>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td id="curso-ou-area" colspan='2'>
+                <div class="form-group"> 
+                  <label for="area">Área:</label>
+                  <input type="text" id="area" placeholder="Digite sua área" />
+                  <small class="error" id="area-erro">Campo obrigatório</small>
+                </div>
+              </td>
+              <td id="matricula-container" colspan='1'>
+                <div class="form-group">
+                  <label for="matricula">Matrícula:</label>
+                  <input type="text" id="matricula" placeholder="Digite sua matrícula" required onblur="validarMatricula()" oninput="validarMatricula()" />
+                  <small class="error" id="matricula-erro">Matrícula inválida</small>
+                </div>
+              </td>
+            </tr>
+            <tr id="lattes-container">
+              <td colspan ="3" style="width: 100%;"> 
+                <div class="form-group">
+                  <label for="lattes">Lattes:</label>
+                  <input type="url" id="lattes" placeholder="Digite o endereço" />
+                </div>
+              </td>
+            </tr>
+          </div>
+          
+            
+          
+        </table>  
+        <div class="button-group">
+          <button type="submit">Enviar</button>
+          <button type="reset">Redefinir</button>
+        </div>      
+      </form>
+    </div>
+
+    
+  </body>
+</html>
