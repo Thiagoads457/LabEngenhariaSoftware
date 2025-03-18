@@ -8,45 +8,24 @@ function atualizarTotal() {
     document.getElementById('total').textContent = total;
 }
 
-// Função para incrementar homens
-function incrementarHomens() {
-    homens++;
+// Função para atualizar o valor de homens
+function atualizarHomens(novoValor) {
+    homens = Math.max(0, novoValor); // Garante que o valor não seja negativo
     document.getElementById('homens').textContent = homens;
     atualizarTotal();
 }
 
-// Função para decrementar homens
-function decrementarHomens() {
-    if (homens > 0) {
-        homens--;
-        document.getElementById('homens').textContent = homens;
-        atualizarTotal();
-    }
-}
-
-// Função para incrementar mulheres
-function incrementarMulheres() {
-    mulheres++;
+// Função para atualizar o valor de mulheres
+function atualizarMulheres(novoValor) {
+    mulheres = Math.max(0, novoValor); // Garante que o valor não seja negativo
     document.getElementById('mulheres').textContent = mulheres;
     atualizarTotal();
-}
-
-// Função para decrementar mulheres
-function decrementarMulheres() {
-    if (mulheres > 0) {
-        mulheres--;
-        document.getElementById('mulheres').textContent = mulheres;
-        atualizarTotal();
-    }
 }
 
 // Função para zerar todos os valores
 function zerarContador() {
-    homens = 0;
-    mulheres = 0;
-    document.getElementById('homens').textContent = homens;
-    document.getElementById('mulheres').textContent = mulheres;
-    atualizarTotal();
+    atualizarHomens(0);
+    atualizarMulheres(0);
 }
 
 // Função para criar o layout da página
@@ -59,7 +38,7 @@ function criarLayout() {
 
     // Título
     const titulo = document.createElement('h1');
-    titulo.textContent = 'Contador';
+    titulo.textContent = 'Contador de Homens e Mulheres';
     container.appendChild(titulo);
 
     // Contador de homens e mulheres
@@ -71,7 +50,7 @@ function criarLayout() {
     homemDiv.classList.add('pessoa');
 
     const homemImg = document.createElement('img');
-    homemImg.src = '../img/garoto.png';
+    homemImg.src = '../img/garoto.png'; // Caminho corrigido
     homemImg.alt = 'Homem';
     homemImg.classList.add('imagem');
 
@@ -80,11 +59,11 @@ function criarLayout() {
 
     const homemBtnMais = document.createElement('button');
     homemBtnMais.textContent = '+';
-    homemBtnMais.onclick = incrementarHomens;
+    homemBtnMais.onclick = () => atualizarHomens(homens + 1); // Atualiza o valor
 
     const homemBtnMenos = document.createElement('button');
     homemBtnMenos.textContent = '-';
-    homemBtnMenos.onclick = decrementarHomens;
+    homemBtnMenos.onclick = () => atualizarHomens(homens - 1); // Atualiza o valor
 
     homemDiv.appendChild(homemImg);
     homemDiv.appendChild(homemTexto);
@@ -105,11 +84,11 @@ function criarLayout() {
 
     const mulherBtnMais = document.createElement('button');
     mulherBtnMais.textContent = '+';
-    mulherBtnMais.onclick = incrementarMulheres;
+    mulherBtnMais.onclick = () => atualizarMulheres(mulheres + 1); // Atualiza o valor
 
     const mulherBtnMenos = document.createElement('button');
     mulherBtnMenos.textContent = '-';
-    mulherBtnMenos.onclick = decrementarMulheres;
+    mulherBtnMenos.onclick = () => atualizarMulheres(mulheres - 1); // Atualiza o valor
 
     mulherDiv.appendChild(mulherImg);
     mulherDiv.appendChild(mulherTexto);
