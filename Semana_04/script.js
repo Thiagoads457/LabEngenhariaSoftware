@@ -165,7 +165,84 @@ function validarFormulario(event) {
     }
 }
 
+// Função para exibir os dados na tela
+function exibirDados(pessoa) {
+    const resultadoDiv = document.getElementById("resultado");
+    resultadoDiv.innerHTML = ""; // Limpa o conteúdo anterior
+
+    const tipo = pessoa instanceof Aluno ? "Aluno" : "Professor";
+
+    const dados = `
+        <h2>Dados do ${tipo}</h2>
+        <p><strong>Nome:</strong> ${pessoa.nome}</p>
+        <p><strong>E-mail:</strong> ${pessoa.email}</p>
+        <p><strong>Data de Nascimento:</strong> ${pessoa.dataNascimento}</p>
+        <p><strong>Telefone Fixo:</strong> ${pessoa.telefoneFixo}</p>
+        <p><strong>Telefone Celular:</strong> ${pessoa.telefoneCelular}</p>
+        <p><strong>Matrícula:</strong> ${pessoa.matricula}</p>
+        <p><strong>${tipo === "Aluno" ? "Curso" : "Área"}:</strong> ${pessoa.curso || pessoa.area}</p>
+    `;
+
+    resultadoDiv.innerHTML = dados;
+}
+
+// Função para validar e enviar o formulário
+function validarFormulario(event) {
+    event.preventDefault();
+
+    validarNome();
+    validarEmail();
+    validarData();
+    validarTelefoneFixo();
+    validarTelefoneCelular();
+    validarMatricula();
+
+    // Verifica se há erros visíveis
+    const erros = document.querySelectorAll(".error");
+    let temErro = false;
+
+    erros.forEach(erro => {
+        if (erro.style.display === "block") {
+            temErro = true;
+        }
+    });
+
+    if (!temErro) {
+        const tipo = document.querySelector('input[name="tipo"]:checked').value;
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const dataNascimento = document.getElementById("dataNascimento").value;
+        const telefoneFixo = document.getElementById("telefone-fixo").value;
+        const telefoneCelular = document.getElementById("telefone-celular").value;
+        const matricula = document.getElementById("matricula").value;
+        const cursoOuArea = document.getElementById("area").value;
+
+        let pessoa;
+
+        if (tipo === "Aluno") {
+            pessoa = new Aluno(nome, email, dataNascimento, telefoneFixo, telefoneCelular, cursoOuArea, matricula);
+        } else {
+            pessoa = new Professor(nome, email, dataNascimento, telefoneFixo, telefoneCelular, cursoOuArea, matricula);
+        }
+
+        console.log(pessoa); // Exibe no console
+        exibirDados(pessoa); // Exibe os dados na tela
+
+        // Limpa as mensagens de erro
+        erros.forEach(erro => {
+            erro.style.display = "none";
+        });
+
+        // Limpa o formulário
+        document.getElementById("form-cadastro").reset();
+    } else {
+        alert("Preencha corretamente todos os campos.");
+    }
+}
 
 // Adiciona o evento de envio ao formulário
 document.getElementById("form-cadastro").addEventListener("submit", validarFormulario);
+
+
+
 
