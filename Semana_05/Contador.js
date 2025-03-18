@@ -40,6 +40,15 @@ function decrementarMulheres() {
     }
 }
 
+// Função para zerar todos os valores
+function zerarContador() {
+    homens = 0;
+    mulheres = 0;
+    document.getElementById('homens').textContent = homens;
+    document.getElementById('mulheres').textContent = mulheres;
+    atualizarTotal();
+}
+
 // Função para criar o layout da página
 function criarLayout() {
     const root = document.getElementById('root');
@@ -87,7 +96,7 @@ function criarLayout() {
     mulherDiv.classList.add('pessoa');
 
     const mulherImg = document.createElement('img');
-    mulherImg.src = '../img/menina.png';
+    mulherImg.src = '../img/menina.png'; // Caminho corrigido
     mulherImg.alt = 'Mulher';
     mulherImg.classList.add('imagem');
 
@@ -116,6 +125,29 @@ function criarLayout() {
     const totalTexto = document.createElement('h2');
     totalTexto.innerHTML = 'Total: <span id="total">0</span>';
     container.appendChild(totalTexto);
+
+    // Botão "Zerar"
+    const btnZerar = document.createElement('button');
+    btnZerar.textContent = 'Zerar';
+    btnZerar.classList.add('btn-zerar');
+    btnZerar.onclick = zerarContador;
+
+    // Botão "Voltar"
+    const btnVoltar = document.createElement('button');
+    btnVoltar.textContent = 'Voltar';
+    btnVoltar.classList.add('btn-voltar');
+    btnVoltar.onclick = () => {
+        window.location.href = '../index.html'; // Redireciona para a página inicial
+    };
+
+    // Container para os botões
+    const botoesContainer = document.createElement('div');
+    botoesContainer.classList.add('botoes-container');
+    botoesContainer.appendChild(btnZerar);
+    botoesContainer.appendChild(btnVoltar);
+
+    // Adiciona os botões ao layout
+    container.appendChild(botoesContainer);
 
     // Adiciona o container ao root
     root.appendChild(container);

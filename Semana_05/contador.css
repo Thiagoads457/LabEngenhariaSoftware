@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -66,4 +67,27 @@ button:hover {
   font-size: 22px;
   font-weight: bold;
   color: #333;
+}
+
+
+.botoes-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-zerar {
+  background-color: #dc3545;
+}
+
+.btn-zerar:hover {
+  background-color: #c82333;
+}
+
+.btn-voltar {
+  background-color: #28a745; 
+}
+
+.btn-voltar:hover {
+  background-color: #218838; 
 }
