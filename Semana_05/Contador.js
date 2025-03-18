@@ -38,7 +38,7 @@ function criarLayout() {
 
     // Título
     const titulo = document.createElement('h1');
-    titulo.textContent = 'Contador de Homens e Mulheres';
+    titulo.textContent = 'Contador';
     container.appendChild(titulo);
 
     // Contador de homens e mulheres
