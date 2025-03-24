@@ -1,142 +1,96 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const displayAtual = document.getElementById('valor-atual');
-    const displayOperacao = document.getElementById('valor-anterior');
-    const botoes = document.querySelectorAll('button');
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('button:not(.btn-voltar)');
     
-    let primeiroNumero = '';
-    let segundoNumero = '';
-    let operacaoSelecionada = '';
-    let deveResetarDisplay = false;
+    let currentInput = '0';
+    let firstOperand = null;
+    let operator = null;
+    let waitingForSecondOperand = false;
 
-    // Função para atualizar o display
-    function atualizarDisplay() {
-        displayAtual.textContent = segundoNumero || primeiroNumero || '0';
-        
-        if (operacaoSelecionada && primeiroNumero && !segundoNumero) {
-            displayOperacao.textContent = `${primeiroNumero} ${operacaoSelecionada}`;
-        } else if (operacaoSelecionada && primeiroNumero && segundoNumero) {
-            displayOperacao.textContent = `${primeiroNumero} ${operacaoSelecionada} ${segundoNumero}`;
+    function updateDisplay() {
+        display.textContent = currentInput;
+    }
+
+    function inputDigit(digit) {
+        if (waitingForSecondOperand) {
+            currentInput = digit;
+            waitingForSecondOperand = false;
         } else {
-            displayOperacao.textContent = '';
+            currentInput = currentInput === '0' ? digit : currentInput + digit;
         }
     }
 
-    // Função para resetar a calculadora
-    function limparCalculadora() {
-        primeiroNumero = '';
-        segundoNumero = '';
-        operacaoSelecionada = '';
-        atualizarDisplay();
+    function inputDecimal() {
+        if (waitingForSecondOperand) {
+            currentInput = '0.';
+            waitingForSecondOperand = false;
+            return;
+        }
+        if (!currentInput.includes('.')) {
+            currentInput += '.';
+        }
     }
 
-    // Função para calcular o resultado
-    function calcularResultado() {
-        if (!operacaoSelecionada || !segundoNumero) return;
+    function handleOperator(nextOperator) {
+        const inputValue = parseFloat(currentInput);
         
-        const num1 = parseFloat(primeiroNumero);
-        const num2 = parseFloat(segundoNumero);
-        let resultado;
-        
-        switch (operacaoSelecionada) {
-            case '+': resultado = num1 + num2; break;
-            case '-': resultado = num1 - num2; break;
-            case '*': resultado = num1 * num2; break;
-            case '/': resultado = num1 / num2; break;
-            default: return;
+        if (firstOperand === null) {
+            firstOperand = inputValue;
+        } else if (operator) {
+            const result = calculate(firstOperand, inputValue, operator);
+            currentInput = String(result);
+            firstOperand = result;
         }
         
-        // Formata o resultado para evitar decimais desnecessários
-        resultado = parseFloat(resultado.toFixed(10)).toString();
-        
-        primeiroNumero = resultado;
-        segundoNumero = '';
-        operacaoSelecionada = '';
-        deveResetarDisplay = true;
-        atualizarDisplay();
+        waitingForSecondOperand = true;
+        operator = nextOperator;
     }
 
-    // Adiciona event listeners para todos os botões
-    botoes.forEach(botao => {
-        botao.addEventListener('click', () => {
-            const valor = botao.getAttribute('data-value');
+    function calculate(firstOperand, secondOperand, operator) {
+        switch (operator) {
+            case '+':
+                return firstOperand + secondOperand;
+            case '-':
+                return firstOperand - secondOperand;
+            case '*':
+                return firstOperand * secondOperand;
+            case '/':
+                return firstOperand / secondOperand;
+            default:
+                return secondOperand;
+        }
+    }
 
-            // Limpar tudo
-            if (valor === 'AC') {
-                limparCalculadora();
-                return;
-            }
+    function resetCalculator() {
+        currentInput = '0';
+        firstOperand = null;
+        operator = null;
+        waitingForSecondOperand = false;
+    }
 
-            // Porcentagem
-            if (valor === '%') {
-                if (segundoNumero) {
-                    segundoNumero = (parseFloat(segundoNumero) / 100).toString();
-                } else if (primeiroNumero) {
-                    primeiroNumero = (parseFloat(primeiroNumero) / 100).toString();
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.getAttribute('data-value');
+            
+            if (value === 'AC') {
+                resetCalculator();
+            } else if (value === '±') {
+                currentInput = (parseFloat(currentInput) * -1).toString();
+            } else if (value === '%') {
+                currentInput = (parseFloat(currentInput) / 100).toString();
+            } else if (value === '.') {
+                inputDecimal();
+            } else if (value === '=') {
+                if (firstOperand !== null && operator) {
+                    handleOperator(null);
                 }
-                atualizarDisplay();
-                return;
-            }
-
-            // Igual - calcular resultado
-            if (valor === '=') {
-                calcularResultado();
-                return;
-            }
-
-            // Operações matemáticas
-            if (['+', '-', '*', '/'].includes(valor)) {
-                if (primeiroNumero && segundoNumero && operacaoSelecionada) {
-                    calcularResultado();
-                }
-                
-                if (primeiroNumero) {
-                    operacaoSelecionada = valor;
-                    deveResetarDisplay = true;
-                    atualizarDisplay();
-                }
-                return;
-            }
-
-            // Ponto decimal
-            if (valor === '.') {
-                const displayAtual = segundoNumero || primeiroNumero || '0';
-                if (displayAtual.includes('.')) return;
-                
-                if (deveResetarDisplay || displayAtual === '0') {
-                    if (operacaoSelecionada) {
-                        segundoNumero = '0.';
-                    } else {
-                        primeiroNumero = '0.';
-                    }
-                    deveResetarDisplay = false;
-                } else {
-                    if (operacaoSelecionada) {
-                        segundoNumero += '.';
-                    } else {
-                        primeiroNumero += '.';
-                    }
-                }
-                atualizarDisplay();
-                return;
-            }
-
-            // Números
-            if (deveResetarDisplay) {
-                if (operacaoSelecionada) {
-                    segundoNumero = valor;
-                } else {
-                    primeiroNumero = valor;
-                }
-                deveResetarDisplay = false;
+            } else if (['+', '-', '*', '/'].includes(value)) {
+                handleOperator(value);
             } else {
-                if (operacaoSelecionada) {
-                    segundoNumero = segundoNumero === '0' ? valor : segundoNumero + valor;
-                } else {
-                    primeiroNumero = primeiroNumero === '0' ? valor : primeiroNumero + valor;
-                }
+                inputDigit(value);
             }
             
-            atualizarDisplay();
+            updateDisplay();
         });
     });
 });

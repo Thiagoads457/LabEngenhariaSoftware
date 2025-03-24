@@ -10,118 +10,84 @@ body {
 }
 
 #calculadora {
-    width: 280px;
+    width: 300px;
     background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto repeat(5, 1fr);
     gap: 12px;
 }
 
+/* Display - mantido na primeira linha */
 #display {
-    grid-column: 1 / -1;
+    grid-column: 1 / span 4;
     text-align: right;
-    padding: 15px;
+    padding: 20px 15px;
+    font-size: 48px;
     background-color: #f8f8f8;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    min-height: 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-#valor-anterior {
-    font-size: 16px;
-    color: #777;
-    height: 20px;
-    overflow: hidden;
+/* Botões numéricos - lado esquerdo */
+button[data-value="7"] { grid-row: 3; grid-column: 1; }
+button[data-value="8"] { grid-row: 3; grid-column: 2; }
+button[data-value="9"] { grid-row: 3; grid-column: 3; }
+button[data-value="4"] { grid-row: 4; grid-column: 1; }
+button[data-value="5"] { grid-row: 4; grid-column: 2; }
+button[data-value="6"] { grid-row: 4; grid-column: 3; }
+button[data-value="1"] { grid-row: 5; grid-column: 1; }
+button[data-value="2"] { grid-row: 5; grid-column: 2; }
+button[data-value="3"] { grid-row: 5; grid-column: 3; }
+button[data-value="0"] { grid-row: 6; grid-column: 2; }
+
+/* Botões de operação - lado direito */
+button[data-value="+"] { grid-row: 5; grid-column: 4; }
+button[data-value="-"] { grid-row: 4; grid-column: 4; }
+button[data-value="*"] { grid-row: 3; grid-column: 4; }
+button[data-value="/"] { grid-row: 2; grid-column: 4; } 
+button[data-value="="] { grid-row: 6; grid-column: 4; }
+
+/* Botões especiais */
+button[data-value="AC"] { grid-row: 2; grid-column: 1; }
+button[data-value="±"] { grid-row: 2; grid-column: 3; } 
+button[data-value="%"] { grid-row: 2; grid-column: 2; }
+button[data-value="."] { grid-row: 6; grid-column: 3; }
+
+
+button[data-value="Voltar"] {
+    grid-row: 7;
+    grid-column: 1 / span 4;
+    background-color: #d4d4d2;
+    color: black;
+    font-size: 20px;
+    height: 50px;
+    border-radius: 25px;
 }
 
-#valor-atual {
-    font-size: 32px;
-    font-weight: bold;
-}
 
 button {
     height: 60px;
     border: none;
-    border-radius: 8px;
-    font-size: 20px;
+    border-radius: 30px;
+    font-size: 24px;
     cursor: pointer;
-    background-color: #e0e0e0;
     transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-button:hover {
-    background-color: #d0d0d0;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-/* Botões numéricos (direita) */
-button[data-value="7"] { grid-row: 3; grid-column: 3; }
-button[data-value="8"] { grid-row: 3; grid-column: 4; }
-button[data-value="9"] { grid-row: 3; grid-column: 2; }
-button[data-value="4"] { grid-row: 4; grid-column: 3; }
-button[data-value="5"] { grid-row: 4; grid-column: 4; }
-button[data-value="6"] { grid-row: 4; grid-column: 2; }
-button[data-value="1"] { grid-row: 5; grid-column: 3; }
-button[data-value="2"] { grid-row: 5; grid-column: 4; }
-button[data-value="3"] { grid-row: 5; grid-column: 2; }
-button[data-value="0"] { grid-row: 6; grid-column: 3 / span 2; }
-button[data-value="."] { grid-row: 6; grid-column: 2; }
-
-/* Botões de operação (esquerda) */
-button[data-value="AC"] { grid-row: 2; grid-column: 1; }
-button[data-value="%"]  { grid-row: 2; grid-column: 2; }
-button[data-value="*"]  { grid-row: 3; grid-column: 1; }
-button[data-value="-"]  { grid-row: 4; grid-column: 1; }
-button[data-value="+"]  { grid-row: 5; grid-column: 1; }
-
-/* Botão igual */
-button[data-value="="] {
-    grid-row: 6;
-    grid-column: 1;
-    background-color: #4CAF50;
+.btn-numero {
+    background-color: #333;
     color: white;
 }
 
-/* Cores especiais */
-button[data-value="AC"],
-button[data-value="%"] {
-    background-color: #9E9E9E;
+.btn-operacao {
+    background-color: #ff9500;
     color: white;
 }
 
-button[data-value="+"],
-button[data-value="-"],
-button[data-value="*"],
-button[data-value="/"] {
-    background-color: #FF9500;
+.btn-funcao {
+    background-color: #a5a5a5;
     color: white;
-}
-
-button[data-value="="]:hover {
-    background-color: #3e8e41;
-}
-
-button[data-value="AC"]:hover,
-button[data-value="%"]:hover {
-    background-color: #757575;
-}
-
-button[data-value="+"]:hover,
-button[data-value="-"]:hover,
-button[data-value="*"]:hover,
-button[data-value="/"]:hover {
-    background-color: #e68a00;
 }

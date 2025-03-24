@@ -9,27 +9,37 @@
   </head>
 <body>
     <div id="calculadora">
-        <div id="display">
-            <span id="valor-anterior"></span>
-            <span id="valor-atual">0</span>
-        </div>
-        <button class="btn-operacao" data-value="AC">AC</button>
-        <button class="btn-operacao" data-value="%">%</button>
+        <div id="display">0</div>
+        
+        <!-- Linha 1 - Botões de função -->
+        <button class="btn-funcao" data-value="AC">AC</button>
+        <button class="btn-funcao" data-value="%">%</button>
+        <button class="btn-funcao" data-value="±">±</button>
+        <button class="btn-operacao" data-value="/">÷</button>
+        
+        <!-- Linha 2 - Números e operação -->
         <button class="btn-numero" data-value="7">7</button>
         <button class="btn-numero" data-value="8">8</button>
         <button class="btn-numero" data-value="9">9</button>
+        <button class="btn-operacao" data-value="*">×</button>
+        
+        <!-- Linha 3 - Números e operação -->
         <button class="btn-numero" data-value="4">4</button>
         <button class="btn-numero" data-value="5">5</button>
         <button class="btn-numero" data-value="6">6</button>
         <button class="btn-operacao" data-value="-">-</button>
+        
+        <!-- Linha 4 - Números e operação -->
         <button class="btn-numero" data-value="1">1</button>
         <button class="btn-numero" data-value="2">2</button>
         <button class="btn-numero" data-value="3">3</button>
         <button class="btn-operacao" data-value="+">+</button>
-        <button class="btn-numero" data-value="0">0</button>
+        
+        <!-- Linha 5 - Voltar e igual -->
+        <button class="btn-voltar" onclick="window.location.href='../index.html'">Voltar</button>
+        <button class="btn-numero zero" data-value="0">0</button>
         <button class="btn-numero" data-value=".">,</button>
         <button class="btn-igual" data-value="=">=</button>
-        <button class="btn-operacao" data-value="*">x</button>
     </div>
     <script src="script.js"></script>
 </body>
