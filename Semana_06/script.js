@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (value === 'AC') {
                 resetCalculator();
+            } else if (value === 'C') {
+                currentInput = '0';
             } else if (value === '±') {
                 currentInput = (parseFloat(currentInput) * -1).toString();
             } else if (value === '%') {
