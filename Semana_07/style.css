@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #3e505c;
+  }
+  
+  .letreiro {
+    font-size: 5rem;
+    color: #333;
+    font-weight: bold;
+  }
+  .caixa {
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(184, 209, 221);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
